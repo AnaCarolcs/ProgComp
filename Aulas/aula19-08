@@ -1,0 +1,146 @@
+ Aula - 19/08/2019 - Programação para Competição
+
+## Entrada e Saída
+
+Problemas de juízes eletrônicos lêem os dados de entrada padrão (_stdin_) e
+escrevem a solução na saída padrão (_stdout_). **Não é** necessária intereção
+com o usuário.
+
+- Ex:
+
+```c
+// URI 1001
+#include <stdio.h>
+int main() {
+  int x, y;
+  scanf("%d %d", &x, &y);
+  // o espaço vazio ignora espaços, tabulações e quebras de linha
+  printf("SOMA = %d\n", x+y);
+  return 0;
+}
+```
+
+```c++
+#include <iostream>
+int main() {
+  ios::sync_with_stdio(false);
+  // Desligar a sincronia entre c/c++ no quesito I/O
+  int x, y;
+  std::cin >> x >> y;
+  std::cout << "SOMA = " << x+y << "\n";
+  return 0;
+}
+```
+
+- **Obs**: não é preciso validar a entrada (intervalos, tipos e etc)
+
+## Vetores vs. Arrays
+
+a. **Array Estático**: "Uma coleção de objetos de mesmo tipo armazenados em memória de forma contígua"
+
+`|X1|X2|X3|...|Xn|`
+
+O acesso aleatório tem complexidade O(1) (constante)
+
+- Ex:
+
+```c
+int xs[10]; // array estático de 10 inteiros
+// int -> tipo
+// xs -> identificador
+// [10] -> quantidade
+```
+
+O tamanho tem que ser conhecido em templo de compilação.
+
+b. **Array Dinâmico**: "O espaço necessário é alocado em tempo de execução"
+
+- Ex:
+
+```c
+int n;
+// ...
+scanf("%d", &n);
+int *xs = (int *) malloc(n * sizeof(int));
+// malloc -> incluído em <sdtlib.h>
+// ...
+xs[2] = 4; // acesso do array da mesma forma que estático
+// ...
+free(xs);  // libera o uso da memória
+```
+
+Como verificar o tamanho de um array:
+
+```c
+double ys[5];
+// ...
+int n = sizeof(ys) / sizeof(double);
+// Caso a operação seja feita com o ponteiro o resultado é 1 ou 0
+// pois sizeof do ponteiro vai ser apenas do primeiro endereço do array
+```
+
+c. **Vector**
+
+O c++ oferece uma abstração dos arrays chamada vector (`#include <vector>`).
+
+- Ex:
+
+```c++
+#include <iostream>
+#include <vector>
+using namespace std;
+int main () {
+  vector<int> xs(10);         // declaração
+  xs[0] = 8;                  // acesso e manipulação igual a de um array
+  cout << xs.size() << '\n';  // saída = 10
+  xs.push_back(-1);           // insere -1 ao final
+  cout << xs.size() << '\n';  // saída = 11
+  for(int i = 0; i < 3; ++i) {
+    xs.pop_back();            //remove o último elemento - O(1)
+  }
+  cout << xs.size() << '\n';  // saída = 8
+  for(size_t i = 0; i < xs.size(); i++) {
+    cout << xs[i] << '\n';    // imprime cada elemento
+  }
+  for(auto x : xs) {          // range-for
+    cout << x << '\n';
+  }
+}
+```
+
+**Obs**: O c++ também oferece uma imeplementação de uma lista duplamente encadeada: _list_ (`#include <list>`)
+
+- Ex:
+
+```c++
+#include <list>
+using namespace std;
+int main() {
+  list<string> as;
+  as[0] = "teste";    // ERRO de compilação!
+  as.push_back("A");  // as = {'A'} - O(1)
+  as.push_front("B"); // as = {'B', 'A'} - O(1)
+  as.pop_front();     // as = {'A'} - O(1)
+  as.pop_back();      // as = {} - O(1)
+  int n = as.size();  // n = 0
+  // ...
+}
+```
+
+### Problema
+
+Entrada: dois inteiros x, y tais que 1 <= x, y <= 10^9
+Saída: o valor do produto x\*y
+
+**Solução**:
+
+```c++
+#include <iostream>
+using namespace std;
+int main() {
+  long long x, y;
+  cin >> x >> y;
+  cout << x*y << endl;
+  return 0;
+}
+```
