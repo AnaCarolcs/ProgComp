@@ -2,17 +2,20 @@
 
 using namespace std;
 
-int proximoPrimo(int primo){
-  int novoPrimo, respotaErrada = -1;
-
-  while(primo++){
-    for (int i = 0; i <= primo / 2; i++) {
-      if (primo % i == 0) {
-        return primo;
+bool primo(int primo){
+  bool prime=true;
+  for (int i=2; i<primo; i++){
+    if ((primo % i) == 0){
+        prime=false;
+        break;
       }
-    }
   }
-  return respotaErrada;
+  if (!prime){
+    return false;
+  }
+  else{
+    return true;
+  }
 }
 
 int main(){
@@ -22,10 +25,18 @@ int main(){
   cin >> n;
   cin >> m;
 
-  if (proximoPrimo(n) == m){
-    cout << "YES" << endl;
-  } else {
-    cout << "NO" << endl;
+  bool x = false;
+
+  for(n = n + 1; !x; n++){
+    x = primo(n);
+    if(x == true){
+    //cout << n << endl;
+      if (n == m){
+        cout << "YES" << endl;
+      } else {
+        cout << "NO" << endl;
+      }
+    }
   }
 
   return 0;
