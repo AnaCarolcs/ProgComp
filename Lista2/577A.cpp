@@ -10,13 +10,13 @@ int main(){
     cin >> n;
     cin >> x;
 
-    if (n == 1) {
+    /*if (n == 1) {
         if (x == 1){
           cout << 1 << endl;
         } else {
           cout << 0 << endl;
         }
-    }
+    }*/
 
     for (int i = 1; i <= n; i++){
         if (x % i == 0 && x / i <= n){
