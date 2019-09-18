@@ -13,7 +13,7 @@ int main(){
 
     for (int i = 1; i <= n; ++i){
         for (int j = 1; j < k; ++j){
-            matriz[i][j] = num++;
+            matriz[i][j] = ++num;
         }
     }
 
