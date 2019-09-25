@@ -4,28 +4,38 @@ using namespace std;
 
 int main(){
 
-  string mao, mesa;
-  int r = 0;
+    int n, angulo, h = 0, aux = 0, pos;
+    bool flag = false;
 
-  cin >> mao;
+    cin >> n;
 
-  for (int i = 0; i < 5; ++i){
-    cin >> mesa;
-    if(mesa[1] == mao[1]){
-      r = 1;
-    } else if(mesa[0] == mao[0]){
-      r = 1;
+    vector<int> angulos;
+
+     for (int i = 0; i < n; i++){
+        cin >> angulo;
+        angulos.push_back(angulo);
     }
-    if(r == 1){
-      cout << "YES" << endl;
-      return 0;
+
+    for(int m = 0; m < 1 << n; ++m) {
+        pos = m;
+        for(int k = 0; k < n; ++k) {
+            if(pos % 2) {
+                aux += angulos[k];
+            } else {
+                aux -= angulos[k];
+            }
+            pos >>= 1;
+        }
+        if(aux % 360 == 0) {
+           flag = true;
+        }
     }
-  }
 
-  if(r == 0){
-    cout << "NO" << endl;
-  }
+    if(flag){
+        cout << "YES\n";
+    } else {
+        cout << "NO\n";
+    }
 
-  return 0;
+    return 0;
 }
-    //  cout << "YES" << endl;
