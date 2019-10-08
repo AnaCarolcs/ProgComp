@@ -4,18 +4,19 @@ using namespace std;
 
 int solve(const vector<int>& as, const vector<int>& bs){
 
-  priority_queue A(as.begin, as.end), B(bs.begin, bs.end);
-  int wins;
+  priority_queue<int> A(as.begin(), as.end()), B(bs.begin(), bs.end());
+  int wins = 0;
 
-  while(not as.empty and not bs.empty){
-    if(as.top() > bs.top()){
+  while(not A.empty() and not B.empty()){
+    if(A.top() > B.top()){
       ++wins;
-      as.pop();
-      bs.pop();
+      A.pop();
+      B.pop();
     } else {
-      bs.pop();
+      B.pop();
     }
   }
+  return wins;
 }
 
 int main(){
